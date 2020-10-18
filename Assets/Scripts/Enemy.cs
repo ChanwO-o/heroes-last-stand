@@ -10,14 +10,13 @@ public class Enemy : MonoBehaviour
     public GameObject knife;
     public bool isTurn;
     private int xDirection;
-    private int recent_xDirection;
     private void Start()
     {
         isTurn = randomBoolean();
         knife = FindObjectOfType<GameObject>();
         gc = FindObjectOfType<GameController>();
-        shotFrom = new Vector2(-4.62f, 1.24f);
-        recent_xDirection = xDirection = 4;
+        shotFrom = new Vector2(2.45f, 2.45f);
+        xDirection = 4;
     }
     void Update()
     {
@@ -56,7 +55,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Tower"))
         {
-            //gc.SpawnKnife(shotFrom);
+            gc.SpawnKnife(shotFrom);
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
