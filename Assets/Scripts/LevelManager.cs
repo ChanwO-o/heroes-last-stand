@@ -8,17 +8,11 @@ public enum ENEMY {
     ice_waddle
 }
 
-
-/*
- This class is for managing a level
- It takes in a level schema (a .json file) and outputs the levels accordingly
- Ideally, levels will be loaded via pure JSON, but for now, PathNodes will be
- planted statically, and the level manager will only be provides the Starts and End
-*/
-// the following cref shows how to specify the reference, such that,
-// the compiler will resolve the reference
-/// <summary cref="C{T}">
-///     LevelManager summary
+/// <summary>
+/// This class is for managing a level
+/// It takes in a level schema (a .json file) and outputs the levels accordingly
+/// Ideally, levels will be loaded via pure JSON, but for now, PathNodes will be
+/// planted statically, and the level manager will only be provided the Starts and End
 /// </summary>
 public class LevelManager : MonoBehaviour
 {
@@ -123,7 +117,9 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Takes a path and returns a list of waves as strings
+    /// </summary>
     List<string> ReadWavesFromText(string path)
     {
         //Read the text from directly from the test.txt file
