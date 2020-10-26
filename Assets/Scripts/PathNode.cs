@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Similar to a link-list node, contains a pointer to its
+//  the next part of the path. Handles branches too
+/// </summary>
 public class PathNode : MonoBehaviour
 {
     public List<PathNode> next = null;
@@ -21,7 +25,6 @@ public class PathNode : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-#if UNITY_EDITOR
         if (next[0] != null)
         {
             for(int i = 0; i < next.Count; i++){
@@ -32,5 +35,4 @@ public class PathNode : MonoBehaviour
 
         }
     }
-#endif
 }

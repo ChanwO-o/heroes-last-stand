@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A base class that will move the parent along a path. 
+/// Upon instantiation, set its target to the first PathNode
+/// of a path
+/// </summary>
 public class PathFollower : MonoBehaviour
 {
     // It needs a path to follow
