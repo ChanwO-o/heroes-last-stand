@@ -1,0 +1,2 @@
+10 waddle 10 ice_waddle
+15 waddle 20 ice_waddle 5 ice-waddle
