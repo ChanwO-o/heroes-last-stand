@@ -80,9 +80,54 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    // This is meant to be called EVERY update. 
-    // It contains all the logic for checking/updating our GAMESTATE
-    // This is part of our state machine
+
+    ///
+    /// === PUBLIC ===
+    ///
+
+    /// <summary>
+    /// By default, our game has to be TOLD to manually start the next wave
+    /// </summary>
+    public void StartNextWave()
+    {
+        // Handle incrementing wave, and other things here
+        // (I just feel like this will be important)
+        current_wave_i++;
+        wave_in_progress = true;
+
+        // Count the number of enemies so we can display
+        foreach(var tuple in the_wave){
+            wave_enemies_left += tuple.Item2;
+        }
+    }
+
+
+    /// <summary>
+    /// Use to pause the game, prevent spawning and stuff
+    /// </summary>
+    public void Pause()
+    {
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
+    }
+
+    /// <summary>
+    /// Have the enemies call this when they reach the last node
+    /// </summary>
+    public void endReached(){
+        // NOTE: In the future, we can add things like displaying a message
+        // "Oh no, an enemy got past" or something
+        player_health -= 1;
+    }
+
+
+
+    ///
+    /// === PRIVATE ===
+    ///
+
+    // Step 1 of teh state machine
     private void checkGameState()
     {
         // What are our conditions for:
@@ -110,21 +155,6 @@ public class LevelManager : MonoBehaviour
             gamestate = 0;
         }
     }
-
-    public void StartNextWave()
-    {
-        // Handle incrementing wave, and other things here
-        // (I just feel like this will be important)
-        current_wave_i++;
-        wave_in_progress = true;
-
-        // Count the number of enemies so we can display
-        foreach(var tuple in the_wave){
-            wave_enemies_left += tuple.Item2;
-        }
-    }
-
-
 
 
     // Logic for when the gamestate == 0
@@ -180,6 +210,18 @@ public class LevelManager : MonoBehaviour
     }
 
 
+    // Logic for when the gamestate != 0
+    private void gameOver()
+    {
+        Debug.Log("game over");
+        if(!GameIsPaused)
+        {
+            Pause();
+        }
+    }
+
+
+
     // Meant to be called only when ALL waves are spawned
     // NOTE enemies are PROBABLY still alive at this point
     // This is DIFFERENT from all enemies being dead
@@ -191,35 +233,6 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// Have the enemies call this when they reach the last node
-    /// </summary>
-    public void endReached(){
-        // NOTE: In the future, we can add things like displaying a message
-        // "Oh no, an enemy got past" or something
-        player_health -= 1;
-    }
-
-
-    // Logic for when the gamestate != 0
-    private void gameOver()
-    {
-        Debug.Log("game over");
-        if(!GameIsPaused)
-        {
-            Pause();
-        }
-    }
-
-    /// <summary>
-    /// Use to pause the game, prevent spawning and stuff
-    /// </summary>
-    public void Pause()
-    {
-        pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
-    }
 
 
 
