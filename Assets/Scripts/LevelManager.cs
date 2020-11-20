@@ -20,6 +20,10 @@ public class LevelManager : MonoBehaviour
     public PathNode end;
     public bool paused = false;
     public float game_speed = 1.0f;
+    //gameover variables
+    public int gamestate = 0; //1 = win //2 = lose
+    public static bool GameIsPaused = false;
+    public GameObject pauseMenuUI;
 
     private string test_path = "Assets/Waves/test.txt";
 
@@ -56,6 +60,15 @@ public class LevelManager : MonoBehaviour
     {
         // according to the timer, instantiate enemies.
         // Best way to keep track of enemies/spawn them?
+
+        //updating the game state
+        if(gamestate != 0){
+            gameover();
+        }
+
+        if(wave_enemies_left == 1){
+            gamestate = 1;
+        }
 
         if (wave_in_progress && !paused)
         {
@@ -102,6 +115,7 @@ public class LevelManager : MonoBehaviour
                 }
             }
         }
+         
     }
 
     public void StartNextWave()
@@ -153,11 +167,26 @@ public class LevelManager : MonoBehaviour
         return new_wave;
     }
 
-
-
     void wavesOver()
     {
         // Just used to handle any logic needed when the last enemy is spawned
         Debug.Log("Last enemy has spawned!");
     }
+
+    void gameover()
+    {
+        Debug.Log("game over");
+        if(!GameIsPaused)
+        {
+            Pause();
+        }
+    }
+
+    void Pause()
+    {
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
+    }
+
 }
