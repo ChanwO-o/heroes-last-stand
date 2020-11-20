@@ -11,6 +11,8 @@ public class PathFollower : MonoBehaviour
 {
     // It needs a path to follow
     public float speed = 0.1f;
+    public int health = 100;
+    public int MAX_HEALTH = 100;
     public PathNode target = null;
 
     // Start is called before the first frame update
@@ -33,6 +35,8 @@ public class PathFollower : MonoBehaviour
             }
         }
 
+        
+
         float step = speed * Time.deltaTime;
 
         // move sprite towards the target location
@@ -46,5 +50,16 @@ public class PathFollower : MonoBehaviour
     // Good place to destroy the object, incr. score, etc...
     void reachedEnd() {
         Debug.Log("Reached the end!");
+    }
+
+    // Returns a number between 0-1
+    // I made this specifically for the healthbar class
+    public float getNormHealth(){
+        return (float)health/ (float)MAX_HEALTH;
+    }
+
+    // Returns the health
+    public int getHealth(){
+        return health;
     }
 }
