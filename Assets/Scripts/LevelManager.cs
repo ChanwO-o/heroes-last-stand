@@ -20,10 +20,15 @@ public class LevelManager : MonoBehaviour
     public PathNode end;
     public bool paused = false;
     public float game_speed = 1.0f;
+    public int player_health = 1;
+
     //gameover variables
     public int gamestate = 0; //1 = win //2 = lose
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
+
+    // Win/Lose condition variables
+    private bool LAST_ENEMY_SPAWNED = false;        // Last enemy, of last wave, has spawned (but NOT died)
 
     private string test_path = "Assets/Waves/test.txt";
 
@@ -58,18 +63,75 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // according to the timer, instantiate enemies.
-        // Best way to keep track of enemies/spawn them?
+        // 1. Check/transition gamestate
+        checkGameState();
 
-        //updating the game state
-        if(gamestate != 0){
-            gameover();
+        // 2. Act based off new gamestate
+        switch(gamestate){
+            case 0: // game not over
+                gameNotOver();
+                break;
+            case 1: // player WON
+                gameOver();
+                break;
+            case 2: // player LOST
+                gameOver(); // for now, in the future we might have a diff call for losing
+                break;
         }
+    }
 
-        if(wave_enemies_left == 1){
+    // This is meant to be called EVERY update. 
+    // It contains all the logic for checking/updating our GAMESTATE
+    // This is part of our state machine
+    private void checkGameState()
+    {
+        // What are our conditions for:
+        // - winning
+        // - losing
+        // - neither?
+        
+
+        if (LAST_ENEMY_SPAWNED && enemies.Length == 0) {
+
+            // WIN conditions:
+            //  ALL enemies are dead
+            //  But you might have more enemies, or more waves SO
+            //  Check if the last enemy has spawned yet.
+            //  THEN its game over
             gamestate = 1;
-        }
 
+        }else if(player_health == 0){
+            // LOSE conditions:
+            //  Player's health is down to 0
+            //  Anything else?
+            gamestate = 2;
+        }else{
+            // If neither, then the game goes on!
+            gamestate = 0;
+        }
+    }
+
+    public void StartNextWave()
+    {
+        // Handle incrementing wave, and other things here
+        // (I just feel like this will be important)
+        current_wave_i++;
+        wave_in_progress = true;
+
+        // Count the number of enemies so we can display
+        foreach(var tuple in the_wave){
+            wave_enemies_left += tuple.Item2;
+        }
+    }
+
+
+
+
+    // Logic for when the gamestate == 0
+    private void gameNotOver(){
+        
+        // We DONT want to do anything if the game is:
+        // Paused, in progress
         if (wave_in_progress && !paused)
         {
             tick += Time.deltaTime;
@@ -115,38 +177,62 @@ public class LevelManager : MonoBehaviour
                 }
             }
         }
-         
     }
 
-    public void StartNextWave()
-    {
-        // Handle incrementing wave, and other things here
-        // (I just feel like this will be important)
-        current_wave_i++;
-        wave_in_progress = true;
 
-        // Count the number of enemies so we can display
-        foreach(var tuple in the_wave){
-            wave_enemies_left += tuple.Item2;
+    // Meant to be called only when ALL waves are spawned
+    // NOTE enemies are PROBABLY still alive at this point
+    // This is DIFFERENT from all enemies being dead
+    private void wavesOver()
+    {
+        // Just used to handle any logic needed when the last enemy is spawned
+        LAST_ENEMY_SPAWNED = true;
+        Debug.Log("Last enemy has spawned!");
+    }
+
+
+    /// <summary>
+    /// Have the enemies call this when they reach the last node
+    /// </summary>
+    public void endReached(){
+        // NOTE: In the future, we can add things like displaying a message
+        // "Oh no, an enemy got past" or something
+        player_health -= 1;
+    }
+
+
+    // Logic for when the gamestate != 0
+    private void gameOver()
+    {
+        Debug.Log("game over");
+        if(!GameIsPaused)
+        {
+            Pause();
         }
     }
 
     /// <summary>
-    /// Takes a path and returns a list of waves as strings
+    /// Use to pause the game, prevent spawning and stuff
     /// </summary>
-    List<string> ReadWavesFromText(string path)
+    public void Pause()
     {
-        //Read the text from directly from the test.txt file
-        var string_array = File.ReadAllLines(path);
-        List<string> waves = new List<string>(string_array);
-        return waves;
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
     }
 
+
+
+
+
+    ///
+    /// === UTILITY & HELPER FUNCTIONS ===
+    ///
 
     // Using the supplied string
     // Creates a new wave
     // [(enemy_enum, int),]
-    List<(ENEMY, int)> loadWave(string wave_string)
+    private List<(ENEMY, int)> loadWave(string wave_string)
     {
         // Make a new dict [{enemy_name: count}]
         List<(ENEMY, int)> new_wave = new List<(ENEMY, int)>();
@@ -167,26 +253,12 @@ public class LevelManager : MonoBehaviour
         return new_wave;
     }
 
-    void wavesOver()
+    /// Takes a path and returns a list of waves as strings
+    private List<string> ReadWavesFromText(string path)
     {
-        // Just used to handle any logic needed when the last enemy is spawned
-        Debug.Log("Last enemy has spawned!");
+        //Read the text from directly from the test.txt file
+        var string_array = File.ReadAllLines(path);
+        List<string> waves = new List<string>(string_array);
+        return waves;
     }
-
-    void gameover()
-    {
-        Debug.Log("game over");
-        if(!GameIsPaused)
-        {
-            Pause();
-        }
-    }
-
-    void Pause()
-    {
-        pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
-    }
-
 }
