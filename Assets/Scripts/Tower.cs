@@ -2,16 +2,31 @@
 
 public class Tower : MonoBehaviour
 {
-    private Vector3 shotFrom;
+    private float thePower;
+    private float theRange;
     private void Awake()
     {
-        shotFrom = transform.Find("shotFrom").position;
+        thePower = 10f;
+        theRange = 1f;
     }
-    private void Update()
+    private void OnMouseDown()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("Click");
-        }
+        UpgradeOverlay.showStatic(this);
+    }
+    public float getPower()
+    {
+        return thePower;
+    }
+    public void setPower(float power)
+    {
+        thePower = power;
+    }
+    public float getRange()
+    {
+        return theRange;
+    }
+    public void setRange(float range)
+    {
+        theRange = range;
     }
 }

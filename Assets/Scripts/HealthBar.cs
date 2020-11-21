@@ -47,7 +47,7 @@ public class HealthBar : MonoBehaviour {
         //healthPercentage = _current_health / maxHealth;                 // gets a float between 0-1
         //x_offset = (float)maxHealth * (1 - healthPercentage) * 0.5f;    // gets the offset needed to align the bar left
         health_percentage = _pf.getNormHealth();
-        Debug.Log("HEALTH: " + health_percentage);
+        //Debug.Log("HEALTH: " + health_percentage);
 
         sr.transform.localScale = new Vector3(health_percentage * bar_scale, y_scale, 1);
     }
