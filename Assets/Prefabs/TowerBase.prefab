@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8971527004379317143}
   - component: {fileID: 315641732026019094}
+  - component: {fileID: 553588453785000269}
   m_Layer: 0
   m_Name: TowerBase
   m_TagString: Tower
@@ -82,3 +83,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &553588453785000269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7041231604256823973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4bb6d715ddfd6b47af4620d0d8a355e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerbaseUI: {fileID: 2999460933334228871, guid: ed173b81459419b4394e5fdccb4ff385,
+    type: 3}

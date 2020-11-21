@@ -66,7 +66,7 @@ public class LevelManager : MonoBehaviour
             gameover();
         }
 
-        if(wave_enemies_left == 1){
+        if(wave_enemies_left == 10){
             gamestate = 1;
         }
 
