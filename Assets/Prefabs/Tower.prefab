@@ -109,4 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1e6ed012fa9c5847a01b4588bdf037a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tower: {fileID: 8092616417560154505}
+  thePower: 0
+  theRange: 0
+  cooldown: 0
+  target: {fileID: 0}
+  projectilePrefab: {fileID: 2548236163094746293, guid: 39e0b4c45fac5456699ac8cf7551f175,
+    type: 3}
