@@ -38,7 +38,42 @@ public class LevelManager : MonoBehaviour
     public float wave_spawn_speed = 1.5f; // 1.5 seconds between spawns
     private float tick = 0.0f;
 
+    public int coin = 2000;
+    public int health = 15;
+    public int dead = 0;
+    public int wave = 1;
 
+    public int getCoin()
+    {
+        return coin;
+    }
+    public void setCoin(int coin) {
+        this.coin = coin;
+    }
+    public int getHealth()
+    {
+        return health;
+    }
+    public void setHealth(int health)
+    {
+        this.health = health;
+    }
+    public int getDead()
+    {
+        return dead;
+    }
+    public void setDeath(int dead)
+    {
+        this.dead = dead;
+    }
+    public int getWave()
+    {
+        return wave;
+    }
+    public void setWave(int wave)
+    {
+        this.wave = wave;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -93,7 +128,7 @@ public class LevelManager : MonoBehaviour
                 the_wave.RemoveAt(0); // If we're out of enemies, pop the empty tuple
             }
             wave_enemies_left--;
-            Debug.Log("Enemies Left: " + wave_enemies_left.ToString());
+            //Debug.Log("Enemies Left: " + wave_enemies_left.ToString());
 
 
             // check if this is the last wave!

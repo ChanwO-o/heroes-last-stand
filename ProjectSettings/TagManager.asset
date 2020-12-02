@@ -8,6 +8,9 @@ TagManager:
   - Knife
   - Tower
   - Blocker
+  - Power
+  - Range
+  - Sell
   layers:
   - Default
   - TransparentFX
