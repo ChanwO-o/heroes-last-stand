@@ -58,7 +58,12 @@ public class PathFollower : MonoBehaviour
     // Good place to destroy the object, incr. score, etc...
     void reachedEnd() {
         Debug.Log("Reached the end!");
-        onReachedEndEvent();
+
+        if (onReachedEndEvent != null)
+        {
+            onReachedEndEvent();
+        }
+
         Destroy(this);
     }
 
