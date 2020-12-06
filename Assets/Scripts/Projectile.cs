@@ -13,6 +13,8 @@ public class Projectile : MonoBehaviour
         transform.position += transform.up * speed * Time.deltaTime;
     }
 
+    // This callback is only triggered if one of the colliders also
+    // has a Rigidbody2d, set to Dynamic mode (not Kinematic)
     private void OnCollisionEnter2D(Collision2D other) {
         Debug.Log("WE HIT SOMETHING");
         // We only want to do damage to enemies.
