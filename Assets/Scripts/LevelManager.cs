@@ -16,11 +16,13 @@ public enum ENEMY {
 /// </summary>
 public class LevelManager : MonoBehaviour
 {
+    public static LevelManager ins;
+
     public List<PathNode> starts = null;
     public PathNode end;
     public bool paused = false;
     public float game_speed = 1.0f;
-    public int player_health = 1;
+    public int player_health = 100;
 
     //gameover variables
     public int gamestate = 0; //1 = win //2 = lose
@@ -47,6 +49,8 @@ public class LevelManager : MonoBehaviour
     public int health = 15;
     public int dead = 0;
     public int wave = 1;
+
+    public event System.Action TakeDamage;
 
     public int getCoin()
     {
@@ -83,6 +87,13 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (ins == null) {
+            ins = this;
+        }
+        else {
+            Destroy(this.gameObject);
+        }
+
         wave_strings = ReadWavesFromText(test_path);
         Debug.Log("Wave 1: " + wave_strings[0]);
 
@@ -154,6 +165,11 @@ public class LevelManager : MonoBehaviour
         // NOTE: In the future, we can add things like displaying a message
         // "Oh no, an enemy got past" or something
         player_health -= 1;
+
+        if (TakeDamage != null)
+        {
+            TakeDamage();
+        }
     }
 
 
