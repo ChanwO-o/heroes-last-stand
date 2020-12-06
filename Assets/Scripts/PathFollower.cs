@@ -14,13 +14,17 @@ public class PathFollower : MonoBehaviour
     public int health = 100;
     public int MAX_HEALTH = 100;
     public PathNode target = null;
-    public static event System.Action onReachedEndEvent;
+    public event System.Action onReachedEndEvent;
+
+    // int reachedEndCount = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         // Upon init, move its position to the first path node
         transform.position = target.transform.position;
+
+        onReachedEndEvent += LevelManager.ins.endReached;
     }
 
     // Update is called once per frame
@@ -33,8 +37,8 @@ public class PathFollower : MonoBehaviour
         }
 
         // If we reached the node, target the next one
-        if(Vector2.Distance(target.transform.position, transform.position) < 0.1){
-            if(target.end == true){
+        if (Vector2.Distance(target.transform.position, transform.position) < 0.1) {
+            if(target.end){
                 // We reached the end, do something
                 reachedEnd();
             }else{
@@ -64,7 +68,7 @@ public class PathFollower : MonoBehaviour
             onReachedEndEvent();
         }
 
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 
     // Returns a number between 0-1
