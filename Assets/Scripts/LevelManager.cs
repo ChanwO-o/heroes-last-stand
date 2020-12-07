@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     public GameObject[] enemies = null;     // public array holding refs to prefabs
     public float wave_spawn_speed = 1.5f;   // 1.5 seconds between spawns
-    public int current_wave_i = 0;          // index of the current wave (out of N waves)
+    public int current_wave_i = -1;          // index of the current wave (out of N waves)
     public bool wave_in_progress = false;   // Must be manually changed to true to start the next wave
 
     private List<(ENEMY, int)> the_wave = null; // The current wave (waves are only loaded 1 at a time)
@@ -103,11 +103,6 @@ public class LevelManager : MonoBehaviour
         wave_strings = ReadWavesFromText(test_path);
         Debug.Log("Wave 1: " + wave_strings[0]);
 
-        // In the future, populate the enemies dict
-        // programatically
-
-        // populate the first wave
-        the_wave = loadWave(wave_strings[current_wave_i]);
 
         // Initial UI setup
         UI.setTextCoins(coin);
