@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
-    public float speed = 1.0f;
-    public float distThreshold = 1.0f;
+    public  Animator animator;
 
+    public float speed = 5.0f;
+    public float distThreshold = 1.0f;
+    public int direction = 2;
 
     public PathFollower target;
     private CircleCollider2D sightCollider;
@@ -39,6 +41,8 @@ public class Hero : MonoBehaviour
     {
         if (target != null)
         {
+            speed = 5.0f;
+
             Vector2 heroPos = gameObject.transform.position;
             Vector2 targetPos = target.gameObject.transform.position;
 
@@ -46,9 +50,54 @@ public class Hero : MonoBehaviour
             {
                 Vector2 directionToTarget = (targetPos - heroPos).normalized;
 
+                UpdateAnimatorDirection(directionToTarget);
+
                 Vector2 deltaDisplacement = Time.deltaTime * speed * directionToTarget;
                 transform.Translate(deltaDisplacement, Space.World);
             }
+        }
+        else
+        {
+            speed = 0.0f;
+        }
+        UpdateAnimatorSpeed();
+    }
+
+    void UpdateAnimatorSpeed()
+    {
+        animator.SetFloat("Speed", speed);
+    }
+
+    void UpdateAnimatorDirection(Vector2 directionVector)
+    {
+        direction = DirectionVectorToInt(directionVector);
+        // Debug.Log("direction: " + direction);
+        animator.SetInteger("Direction", direction);
+    }
+
+    /*
+        Converts a velocity to cardinal direction value (NESW)
+        North: x is small, y is large +
+        South: x is small, y is large -
+        East: x is large +, y is small
+        West: x is large -, y is small
+    */
+    int DirectionVectorToInt(Vector2 directionVector)
+    {
+        float x = directionVector[0];
+        float y = directionVector[1];
+        
+        if (y > 0 && Mathf.Abs(y) >= Mathf.Abs(x)) {
+            return 0; // north
+        }
+        else if (x > 0 && Mathf.Abs(x) > Mathf.Abs(y)) {
+            return 1; // east
+        }
+        else if (y < 0 && Mathf.Abs(y) >= Mathf.Abs(x)) {
+            return 2; // south
+        }
+        else {
+            return 3; // west
         }
     }
 
