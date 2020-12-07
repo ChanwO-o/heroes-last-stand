@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
-    public float speed = 1.0f;
-    public float distThreshold = 1.0f;
+    public  Animator animator;
 
+    public float speed = 5.0f;
+    public float distThreshold = 1.0f;
+    public float attackRangeThreshold = 1.0f; // hero's attack range
+    public int direction = 2;
+    public bool isAttacking = false;
 
     public PathFollower target;
     private CircleCollider2D sightCollider;
@@ -39,16 +43,83 @@ public class Hero : MonoBehaviour
     {
         if (target != null)
         {
+            speed = 5.0f; // informs animator to play move animation
+
             Vector2 heroPos = gameObject.transform.position;
             Vector2 targetPos = target.gameObject.transform.position;
+            float distance = Vector2.Distance(heroPos, targetPos);
 
-            if (Vector2.Distance(heroPos, targetPos) > distThreshold)
+            if (distance > distThreshold) // not at target; move towards target
             {
                 Vector2 directionToTarget = (targetPos - heroPos).normalized;
+                UpdateAnimatorDirection(directionToTarget);
 
                 Vector2 deltaDisplacement = Time.deltaTime * speed * directionToTarget;
                 transform.Translate(deltaDisplacement, Space.World);
             }
+
+            // Debug.Log("distance: " + distance + " " + attackRangeThreshold);
+
+            if (distance > attackRangeThreshold) // target not in range
+            {
+                UpdateAnimatorIsAttacking(false);
+            }
+            else // in range; attack!
+            {
+                // Debug.Log("TARGET IN RANGE");
+                Debug.Log("distance: " + distance + " range: " + attackRangeThreshold);
+                UpdateAnimatorIsAttacking(true);
+            }
+        }
+        else // no target set or target is killed
+        {
+            speed = 0.0f;
+            UpdateAnimatorIsAttacking(false);
+        }
+        UpdateAnimatorSpeed();
+    }
+
+    void UpdateAnimatorSpeed()
+    {
+        animator.SetFloat("Speed", speed);
+    }
+
+    void UpdateAnimatorDirection(Vector2 directionVector)
+    {
+        direction = DirectionVectorToInt(directionVector);
+        // Debug.Log("direction: " + direction);
+        animator.SetInteger("Direction", direction);
+    }
+
+    void UpdateAnimatorIsAttacking(bool attacking)
+    {
+        isAttacking = attacking;
+        animator.SetBool("IsAttacking", attacking);
+    }
+
+    /*
+        Converts a velocity to cardinal direction value (NESW)
+        North: x is small, y is large +
+        South: x is small, y is large -
+        East: x is large +, y is small
+        West: x is large -, y is small
+    */
+    int DirectionVectorToInt(Vector2 directionVector)
+    {
+        float x = directionVector[0];
+        float y = directionVector[1];
+        
+        if (y > 0 && Mathf.Abs(y) >= Mathf.Abs(x)) {
+            return 0; // north
+        }
+        else if (x > 0 && Mathf.Abs(x) > Mathf.Abs(y)) {
+            return 1; // east
+        }
+        else if (y < 0 && Mathf.Abs(y) >= Mathf.Abs(x)) {
+            return 2; // south
+        }
+        else {
+            return 3; // west
         }
     }
 
@@ -82,9 +153,12 @@ public class Hero : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            Debug.Log("detected collision with enemy");
-        }
+        // if (other.gameObject.CompareTag("Enemy"))
+        // {
+        //     Debug.Log("detected collision with enemy");
+            
+        //     // play attack animation if hero is in range of target
+            
+        // }
     }
 }
