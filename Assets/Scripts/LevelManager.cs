@@ -130,6 +130,8 @@ public class LevelManager : MonoBehaviour
                 gameOver(); // for now, in the future we might have a diff call for losing
                 break;
         }
+
+        UpdateUI();
     }
 
 
@@ -142,6 +144,7 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     public void StartNextWave()
     {
+        if(LAST_ENEMY_SPAWNED){ return; }
         // Handle incrementing wave, and other things here
         // (I just feel like this will be important)
         current_wave_i++;
@@ -251,6 +254,7 @@ public class LevelManager : MonoBehaviour
             if (wave_enemies_left == 0)
             {
                 // end of the wave, load the next one
+                Debug.Log("wave not in progress no more");
                 wave_in_progress = false;
 
                 if (current_wave_i == wave_strings.Count - 1)
@@ -290,6 +294,14 @@ public class LevelManager : MonoBehaviour
         // Just used to handle any logic needed when the last enemy is spawned
         LAST_ENEMY_SPAWNED = true;
         Debug.Log("Last enemy has spawned!");
+    }
+
+    /// <summary>
+    /// Update any UI related state here
+    /// </summary>
+    private void UpdateUI(){
+        
+        UI.startWaveEnable(!wave_in_progress);  // We want to DISABLE the button when wave is in progress
     }
 
 
