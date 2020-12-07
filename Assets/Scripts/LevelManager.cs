@@ -4,8 +4,11 @@ using UnityEngine;
 using System.IO;
 
 public enum ENEMY {
+    // NOTE
+    // When writing levels, use these exact names
     waddle,
-    ice_waddle
+    ice_waddle,
+    yellow_waddle
 }
 
 /// <summary>
