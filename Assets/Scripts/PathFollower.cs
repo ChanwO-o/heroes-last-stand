@@ -37,8 +37,8 @@ public class PathFollower : MonoBehaviour
         }
 
         // If we reached the node, target the next one
-        if (Vector2.Distance(target.transform.position, transform.position) < 0.1) {
-            if(target.end){
+        if(Vector2.Distance(target.transform.position, transform.position) < 0.3){
+            if(target.end == true){
                 // We reached the end, do something
                 reachedEnd();
             }else{
