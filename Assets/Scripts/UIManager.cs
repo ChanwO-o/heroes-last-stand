@@ -32,10 +32,10 @@ public class UIManager : MonoBehaviour
         if (textDeath)
             textDeath.text = death.ToString();
     }
-    public void setTextWave(int wave)
+    public void setTextWave(string wave)
     {
         if (textWave)
-            textWave.text = wave.ToString();
+            textWave.text = wave;
     }
     public void setTextPower(float power)
     {

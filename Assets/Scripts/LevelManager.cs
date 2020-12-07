@@ -20,10 +20,10 @@ public enum ENEMY {
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager ins;
+    public UIManager UI;
 
     public List<PathNode> starts = null;
     public PathNode end;
-    public bool paused = false;
     public float game_speed = 1.0f;
     public int player_health = 100;
 
@@ -38,20 +38,22 @@ public class LevelManager : MonoBehaviour
     private string test_path = "Assets/Waves/test.txt";
 
 
-    private List<string> wave_strings = null;
-    public int current_wave_i = 0;
-    public List<(ENEMY, int)> the_wave = null;
-    public bool wave_in_progress = false;
+    // Variables for handling the wave. Might have
+    // been better as an Object haha
     [SerializeField]
-    public GameObject[] enemies = null;
-    private int wave_enemies_left = 0;
-    public float wave_spawn_speed = 1.5f; // 1.5 seconds between spawns
-    private float tick = 0.0f;
+    public GameObject[] enemies = null;     // public array holding refs to prefabs
+    public float wave_spawn_speed = 1.5f;   // 1.5 seconds between spawns
+    public int current_wave_i = 0;          // index of the current wave (out of N waves)
+    public bool wave_in_progress = false;   // Must be manually changed to true to start the next wave
+
+    private List<(ENEMY, int)> the_wave = null; // The current wave (waves are only loaded 1 at a time)
+    private List<string> wave_strings = null;   // Raw strings. Each line = 1 wave
+    private int wave_enemies_left = 0;          // For keeping track of how many are left to SPAWN
+    private float tick = 0.0f;                  // internal var to keep track of spawn rate
 
     public int coin = 2000;
     public int health = 15;
     public int dead = 0;
-    public int wave = 1;
 
     public event System.Action TakeDamage;
 
@@ -78,14 +80,15 @@ public class LevelManager : MonoBehaviour
     {
         this.dead = dead;
     }
-    public int getWave()
+    public string getWaveString()
     {
-        return wave;
+        // Return a nicely formatted string
+        // Ex: "2/5"
+        int totalWaves = (int)wave_strings.Count;
+        int thisWave = current_wave_i + 1;
+        return System.String.Format("Waves: {0}/{1}", thisWave, totalWaves);
     }
-    public void setWave(int wave)
-    {
-        this.wave = wave;
-    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -105,6 +108,11 @@ public class LevelManager : MonoBehaviour
 
         // populate the first wave
         the_wave = loadWave(wave_strings[current_wave_i]);
+
+        // Initial UI setup
+        UI.setTextCoins(coin);
+        UI.setTextDeath(dead);
+        UI.setTextWave( getWaveString() );
     }
 
 
@@ -143,6 +151,8 @@ public class LevelManager : MonoBehaviour
         // (I just feel like this will be important)
         current_wave_i++;
         wave_in_progress = true;
+        the_wave = loadWave(wave_strings[current_wave_i]);
+        UI.setTextWave( getWaveString() );
 
         // Count the number of enemies so we can display
         foreach(var tuple in the_wave){
@@ -216,9 +226,9 @@ public class LevelManager : MonoBehaviour
         
         // We DONT want to do anything if the game is:
         // Paused, in progress
-        if (wave_in_progress && !paused)
+        if (wave_in_progress && !GameIsPaused)
         {
-            tick += Time.deltaTime;
+            tick += Time.deltaTime * game_speed;
             if(tick < wave_spawn_speed){
                 return;
             }
@@ -247,17 +257,18 @@ public class LevelManager : MonoBehaviour
             {
                 // end of the wave, load the next one
                 wave_in_progress = false;
-                current_wave_i++;
 
-                if (current_wave_i == wave_strings.Count)
+                if (current_wave_i == wave_strings.Count - 1)
                 {
                     // the last wave just finished!
                     // Cue, end of the level?
                     wavesOver();
                     return;
                 }else{
-                    // If it wasn't the last wave, load the next
-                    the_wave = loadWave(wave_strings[current_wave_i]);
+                    // If it wasn't the last wave, DONT load the next:
+                    // Instead wait for StartNextWave() to be called
+                    
+                    //the_wave = loadWave(wave_strings[current_wave_i]);
                 }
             }
         }
