@@ -4735,8 +4735,9 @@ MonoBehaviour:
   current_wave_i: 0
   wave_in_progress: 1
   enemies:
-  - {fileID: 2563334592570846981, guid: 41f689eb2fd104ed0a5484104dcca7e6, type: 3}
   - {fileID: 5946554790470516550, guid: aae9279d68de94ed6a49249d999d1e3d, type: 3}
+  - {fileID: 2563334592570846981, guid: 41f689eb2fd104ed0a5484104dcca7e6, type: 3}
+  - {fileID: 6158710010435254625, guid: f8acdf98b602243f58cf2fed94528c59, type: 3}
   wave_spawn_speed: 0.99
   coin: 2000
   health: 15
