@@ -145,6 +145,7 @@ public class LevelManager : MonoBehaviour
     public void StartNextWave()
     {
         if(LAST_ENEMY_SPAWNED){ return; }
+        
         // Handle incrementing wave, and other things here
         // (I just feel like this will be important)
         current_wave_i++;
@@ -242,19 +243,17 @@ public class LevelManager : MonoBehaviour
             new_enemy.GetComponent<PathFollower>().target = starts[0];
 
             // decrement!
-            the_wave[0] = (the_wave[0].Item1, the_wave[0].Item2 - 1); // Tuples are immutable so here we are
+            the_wave[0] = (the_wave[0].Item1, the_wave[0].Item2 - 1); // Immutable workaround for the_wave[0][1]--
             if( the_wave[0].Item2 == 0){
                 the_wave.RemoveAt(0); // If we're out of enemies, pop the empty tuple
             }
             wave_enemies_left--;
-            //Debug.Log("Enemies Left: " + wave_enemies_left.ToString());
 
 
             // check if this is the last wave!
             if (wave_enemies_left == 0)
             {
                 // end of the wave, load the next one
-                Debug.Log("wave not in progress no more");
                 wave_in_progress = false;
 
                 if (current_wave_i == wave_strings.Count - 1)
@@ -327,7 +326,7 @@ public class LevelManager : MonoBehaviour
         // [count1, enemy1, count2, enemy2, ... ]
         for (int i = 0; i < str_arr.Length; i += 2)
         {
-            wave_enemies_left += System.Convert.ToInt32(str_arr[i]);
+            //wave_enemies_left += System.Convert.ToInt32(str_arr[i]);
             new_wave.Add((
                 (ENEMY) System.Enum.Parse( typeof(ENEMY) ,str_arr[i + 1] ),
                 System.Convert.ToInt32(str_arr[i])
