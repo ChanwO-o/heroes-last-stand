@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hero : MonoBehaviour
+public class Mage : MonoBehaviour
 {
     public  Animator animator;
 
     public float power = 20.0f;
     public float speed = 5.0f;
-    public float distThreshold = 1.0f;
-    public float attackRangeThreshold = 1.3f; // hero's attack range
+    public float distThreshold = 4.0f;
+    public float attackRangeThreshold = 5.0f; // hero's attack range
     public int direction = 2;
     public bool isAttacking = false;
     private int clock = 0;
@@ -21,7 +21,6 @@ public class Hero : MonoBehaviour
     /// <summary>
     /// Used to determine the correct animation to play.
     /// </summary>
-    private enum Direction { UP, DOWN, LEFT, RIGHT }
 
     // Start is called before the first frame update
     void Start()
@@ -165,12 +164,6 @@ public class Hero : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        // if (other.gameObject.CompareTag("Enemy"))
-        // {
-        //     Debug.Log("detected collision with enemy");
-            
-        //     // play attack animation if hero is in range of target
-            
-        // }
+        
     }
 }
