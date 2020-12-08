@@ -3922,7 +3922,7 @@ PrefabInstance:
     - target: {fileID: 7300686530818841128, guid: bfd80d6817ac75e44be459816fc6b49b,
         type: 3}
       propertyPath: m_Name
-      value: Hero
+      value: Warrior
       objectReference: {fileID: 0}
     - target: {fileID: 7300686530818841132, guid: bfd80d6817ac75e44be459816fc6b49b,
         type: 3}
