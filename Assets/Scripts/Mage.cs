@@ -8,8 +8,8 @@ public class Mage : MonoBehaviour
 
     public float power = 20.0f;
     public float speed = 5.0f;
-    public float distThreshold = 2.0f;
-    public float attackRangeThreshold = 2.3f; // hero's attack range
+    public float distThreshold = 4.0f;
+    public float attackRangeThreshold = 5.0f; // hero's attack range
     public int direction = 2;
     public bool isAttacking = false;
     private int clock = 0;

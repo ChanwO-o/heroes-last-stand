@@ -1900,7 +1900,7 @@ PrefabInstance:
     - target: {fileID: 7300686530818841128, guid: bfd80d6817ac75e44be459816fc6b49b,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7300686530818841133, guid: bfd80d6817ac75e44be459816fc6b49b,
         type: 3}
@@ -2040,8 +2040,8 @@ MonoBehaviour:
   animator: {fileID: 855980953}
   power: 20
   speed: 5
-  distThreshold: 1
-  attackRangeThreshold: 1.3
+  distThreshold: 4
+  attackRangeThreshold: 5
   direction: 2
   isAttacking: 0
   target: {fileID: 0}
