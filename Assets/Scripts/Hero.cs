@@ -6,10 +6,10 @@ public class Hero : MonoBehaviour
 {
     public  Animator animator;
 
-    public float power = 1.0f;
+    public float power = 20.0f;
     public float speed = 5.0f;
     public float distThreshold = 1.0f;
-    public float attackRangeThreshold = 1.0f; // hero's attack range
+    public float attackRangeThreshold = 1.3f; // hero's attack range
     public int direction = 2;
     public bool isAttacking = false;
     private int clock = 0;
@@ -103,7 +103,7 @@ public class Hero : MonoBehaviour
 
     void AttackTarget()
     {
-        if (clock % 10 == 0) // do damage once every 10th tick
+        if (clock % 200 == 0) // do damage once every 10th tick
         {
             target.gameObject.GetComponent<PathFollower>().doDamage(power);
         }
