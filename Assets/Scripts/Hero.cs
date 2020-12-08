@@ -6,11 +6,13 @@ public class Hero : MonoBehaviour
 {
     public  Animator animator;
 
+    public float power = 20.0f;
     public float speed = 5.0f;
     public float distThreshold = 1.0f;
-    public float attackRangeThreshold = 1.0f; // hero's attack range
+    public float attackRangeThreshold = 1.3f; // hero's attack range
     public int direction = 2;
     public bool isAttacking = false;
+    private int clock = 0;
 
     public PathFollower target;
     private CircleCollider2D sightCollider;
@@ -32,6 +34,7 @@ public class Hero : MonoBehaviour
     {
         CheckMouseClickForTargetSelection();
         MoveToTarget();
+        clock += 1;
     }
 
     /// <summary>
@@ -69,6 +72,7 @@ public class Hero : MonoBehaviour
                 // Debug.Log("TARGET IN RANGE");
                 Debug.Log("distance: " + distance + " range: " + attackRangeThreshold);
                 UpdateAnimatorIsAttacking(true);
+                AttackTarget();
             }
         }
         else // no target set or target is killed
@@ -95,6 +99,14 @@ public class Hero : MonoBehaviour
     {
         isAttacking = attacking;
         animator.SetBool("IsAttacking", attacking);
+    }
+
+    void AttackTarget()
+    {
+        if (clock % 200 == 0) // do damage once every 10th tick
+        {
+            target.gameObject.GetComponent<PathFollower>().doDamage(power);
+        }
     }
 
     /*
