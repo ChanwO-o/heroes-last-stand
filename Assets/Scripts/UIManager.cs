@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public Text textDeath;
     public Text textWave;
     public Text textPower;
+    public Button StartWave;
     public LevelManager levelManager;
     private void Start()
     {
@@ -32,14 +33,19 @@ public class UIManager : MonoBehaviour
         if (textDeath)
             textDeath.text = death.ToString();
     }
-    public void setTextWave(int wave)
+    public void setTextWave(string wave)
     {
         if (textWave)
-            textWave.text = wave.ToString();
+            textWave.text = wave;
     }
     public void setTextPower(float power)
     {
         if (textPower)
             textPower.text = power.ToString();
+    }
+    public void startWaveEnable(bool interactable){
+        if(StartWave){
+            StartWave.interactable = interactable;
+        }
     }
 }
