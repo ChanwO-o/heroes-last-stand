@@ -34,7 +34,6 @@ public class Tower : MonoBehaviour
         }else{
             // look for an enemy within range
             foreach(GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy")){
-                Debug.Log("ENEMY");
                 if(Vector3.Distance( enemy.transform.position, transform.position) < theRange){
                     target = enemy.GetComponent<PathFollower>();
                     break;
