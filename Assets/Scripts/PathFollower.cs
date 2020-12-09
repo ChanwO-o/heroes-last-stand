@@ -16,6 +16,7 @@ public class PathFollower : MonoBehaviour
     public int MAX_HEALTH = 100;
     public PathNode target = null;
     public event System.Action onReachedEndEvent;
+    public event System.Action onDeathEvent;
 
     public UIManager UIM;
     private LevelManager levelManager;
@@ -33,6 +34,7 @@ public class PathFollower : MonoBehaviour
         transform.position = target.transform.position;
 
         onReachedEndEvent += LevelManager.ins.endReached;
+        onDeathEvent += LevelManager.ins.incrDeathCount;
     }
 
     // Update is called once per frame
@@ -98,5 +100,9 @@ public class PathFollower : MonoBehaviour
     // Use this to deal damage to this enemy
     public void doDamage(float damage){
         health -= (int)damage;
+    }
+
+    private void OnDestroy() {
+        onDeathEvent();
     }
 }

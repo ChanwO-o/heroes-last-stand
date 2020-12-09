@@ -33,7 +33,7 @@ public class LevelManager : MonoBehaviour
     public GameObject pauseMenuUI;
 
     // Win/Lose condition variables
-    private bool LAST_ENEMY_SPAWNED = false;        // Last enemy, of last wave, has spawned (but NOT died)
+    public bool LAST_ENEMY_SPAWNED = false;        // Last enemy, of last wave, has spawned (but NOT died)
 
     private string test_path = "Waves/test";
 
@@ -42,6 +42,7 @@ public class LevelManager : MonoBehaviour
     // been better as an Object haha
     [SerializeField]
     public GameObject[] enemies = null;     // public array holding refs to prefabs
+    public int enemy_count = 0;
     public float wave_spawn_speed = 1.5f;   // 1.5 seconds between spawns
     public int current_wave_i = -1;          // index of the current wave (out of N waves)
     public bool wave_in_progress = false;   // Must be manually changed to true to start the next wave
@@ -79,6 +80,11 @@ public class LevelManager : MonoBehaviour
     public void setDeath(int dead)
     {
         this.dead = dead;
+    }
+    public void incrDeathCount(){
+        this.dead += 1;
+        UI.setTextDeath(this.dead);
+        enemy_count--;
     }
     public string getWaveString()
     {
@@ -202,13 +208,14 @@ public class LevelManager : MonoBehaviour
         // - neither?
         
 
-        if (LAST_ENEMY_SPAWNED && enemies.Length == 0) {
+        if (LAST_ENEMY_SPAWNED &&  enemy_count == 0) {
 
             // WIN conditions:
             //  ALL enemies are dead
             //  But you might have more enemies, or more waves SO
             //  Check if the last enemy has spawned yet.
             //  THEN its game over
+            Debug.Log("YOU WON");
             gamestate = 1;
 
         }else if(player_health == 0){
@@ -238,6 +245,7 @@ public class LevelManager : MonoBehaviour
             tick = 0.0f;
 
             // spawn enemy
+            enemy_count++;
             GameObject new_enemy = Instantiate(
                 enemies[(int)the_wave[0].Item1 ], // grab the corresponding enemy using its enum -> int
                 starts[0].transform.position,
@@ -279,7 +287,6 @@ public class LevelManager : MonoBehaviour
     // Logic for when the gamestate != 0
     private void gameOver()
     {
-        Debug.Log("game over");
         if(!GameIsPaused)
         {
             Pause();
@@ -302,8 +309,9 @@ public class LevelManager : MonoBehaviour
     /// Update any UI related state here
     /// </summary>
     private void UpdateUI(){
-        
-        UI.startWaveEnable(!wave_in_progress);  // We want to DISABLE the button when wave is in progress
+        // We want to DISABLE the button when wave is in progress
+        // Keep disabled if the last enemy has spawned
+        UI.startWaveEnable(!wave_in_progress && !LAST_ENEMY_SPAWNED);
     }
 
 
