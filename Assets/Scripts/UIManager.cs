@@ -24,14 +24,6 @@ public class UIManager : MonoBehaviour
         setTextCoins(levelManager.getCoin());
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            levelManager.GameIsPaused = !levelManager.GameIsPaused;
-        }
-    }
-
     public void setTextCoins(int coins)
     {
         if (textCoins)

@@ -126,10 +126,10 @@ public class LevelManager : MonoBehaviour
     }
 
 
-
     // Update is called once per frame
     void Update()
     {
+        CheckInput();
         // 1. Check/transition gamestate
         checkGameState();
 
@@ -147,7 +147,6 @@ public class LevelManager : MonoBehaviour
         }
 
         UpdateUI();
-        CheckInput();
     }
 
 
@@ -189,6 +188,7 @@ public class LevelManager : MonoBehaviour
 
     public void Resume()
     {
+        Debug.Log("RESUMED");
         //pauseMenuUI.SetActive(false);
         UI.displayPauseMenu(false, gamestate);
         Time.timeScale = 1f;
@@ -328,6 +328,7 @@ public class LevelManager : MonoBehaviour
     private void CheckInput(){
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Debug.Log("ESCAPED");
             if(GameIsPaused)
             {
                 Resume();
