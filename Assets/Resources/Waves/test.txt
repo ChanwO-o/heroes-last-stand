@@ -1,0 +1,4 @@
+# This is a comment. Follow the example below to add more waves!
+# Each line is a wave
+1 waddle 1 ice_waddle 1 yellow_waddle
+15 waddle 20 ice_waddle 5 ice_waddle
