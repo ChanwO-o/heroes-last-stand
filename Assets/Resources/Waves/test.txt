@@ -1,2 +1,3 @@
+# This is a comment. Hopefully it doesn't get used
 1 waddle 1 ice_waddle 1 yellow_waddle
 15 waddle 20 ice_waddle 5 ice_waddle

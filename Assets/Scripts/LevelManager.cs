@@ -35,7 +35,7 @@ public class LevelManager : MonoBehaviour
     // Win/Lose condition variables
     private bool LAST_ENEMY_SPAWNED = false;        // Last enemy, of last wave, has spawned (but NOT died)
 
-    private string test_path = "Assets/Waves/test.txt";
+    private string test_path = "Waves/test";
 
 
     // Variables for handling the wave. Might have
@@ -99,6 +99,9 @@ public class LevelManager : MonoBehaviour
         else {
             Destroy(this.gameObject);
         }
+
+        var test = Resources.Load(test_path);
+        Debug.Log("TEST: " + test.ToString());
 
         wave_strings = ReadWavesFromText(test_path);
         Debug.Log("Wave 1: " + wave_strings[0]);
@@ -340,9 +343,18 @@ public class LevelManager : MonoBehaviour
     /// Takes a path and returns a list of waves as strings
     private List<string> ReadWavesFromText(string path)
     {
-        //Read the text from directly from the test.txt file
-        var string_array = File.ReadAllLines(path);
-        List<string> waves = new List<string>(string_array);
+        var txt = Resources.Load(path); // Need this for final build
+        var str = txt.ToString().Split('\n');
+        List<string> waves = new List<string>();
+
+        // Filter out comments;
+        for (int i = 0; i < str.Length; i++){
+            if(str[i][0] != '#'){
+                waves.Add(str[i]);
+            }
+        }
+
+        Debug.Log("Waves Loaded: " + waves[0]);
         return waves;
     }
 }
