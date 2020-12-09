@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class pausemenu : MonoBehaviour
 {
+    // I moved most of this funtionality into LevelManager
+    // - Tony
  
     public static bool GameIsPaused = false;
 

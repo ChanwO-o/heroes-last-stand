@@ -329,7 +329,7 @@ Transform:
   - {fileID: 283776558}
   - {fileID: 1282887264}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &192691505
 PrefabInstance:
@@ -578,7 +578,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 284394757}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 723795aad28cb8c4e94333ab171aba89, type: 3}
   m_Name: 
@@ -672,8 +672,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1994108036}
   - {fileID: 556973456}
+  - {fileID: 1994108036}
   - {fileID: 1693957350}
   m_Father: {fileID: 656288897}
   m_RootOrder: 0
@@ -1031,7 +1031,7 @@ GameObject:
   - component: {fileID: 556973458}
   - component: {fileID: 556973457}
   m_Layer: 5
-  m_Name: GameOver text
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1050,7 +1050,7 @@ RectTransform:
   m_Children:
   - {fileID: 2099007135}
   m_Father: {fileID: 309114727}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -1567,6 +1567,8 @@ MonoBehaviour:
   textWave: {fileID: 1702676396}
   textPower: {fileID: 1390660798}
   StartWave: {fileID: 1142424253}
+  pauseMenuUI: {fileID: 1028870524}
+  pauseMenuTitle: {fileID: 2099007136}
   levelManager: {fileID: 2115405288}
 --- !u!4 &778328465
 Transform:
@@ -1580,7 +1582,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &778948830
 GameObject:
@@ -2252,7 +2254,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1028870524
 GameObject:
@@ -2348,7 +2350,7 @@ Transform:
   m_Children:
   - {fileID: 656288897}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1066121424
 GameObject:
@@ -3943,7 +3945,7 @@ Transform:
   m_Children:
   - {fileID: 1878193754}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1693957349
 GameObject:
@@ -3981,7 +3983,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.023232, y: -55}
+  m_AnchoredPosition: {x: 0.0000081211, y: -65.5}
   m_SizeDelta: {x: 96.3472, y: 37.84958}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1693957351
@@ -4984,7 +4986,7 @@ RectTransform:
   m_Children:
   - {fileID: 1466032165}
   m_Father: {fileID: 309114727}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -5418,6 +5420,7 @@ MonoBehaviour:
   game_speed: 1
   player_health: 15
   gamestate: 0
+  GameIsPaused: 0
   pauseMenuUI: {fileID: 1028870524}
   enemies:
   - {fileID: 5946554790470516550, guid: aae9279d68de94ed6a49249d999d1e3d, type: 3}
