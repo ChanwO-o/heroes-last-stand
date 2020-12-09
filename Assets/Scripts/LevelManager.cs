@@ -80,6 +80,10 @@ public class LevelManager : MonoBehaviour
     {
         this.dead = dead;
     }
+    public void incrDeathCount(){
+        this.dead += 1;
+        UI.setTextDeath(this.dead);
+    }
     public string getWaveString()
     {
         // Return a nicely formatted string
@@ -206,6 +210,7 @@ public class LevelManager : MonoBehaviour
             //  But you might have more enemies, or more waves SO
             //  Check if the last enemy has spawned yet.
             //  THEN its game over
+            Debug.Log("YOU WON");
             gamestate = 1;
 
         }else if(player_health == 0){
@@ -299,8 +304,9 @@ public class LevelManager : MonoBehaviour
     /// Update any UI related state here
     /// </summary>
     private void UpdateUI(){
-        
-        UI.startWaveEnable(!wave_in_progress);  // We want to DISABLE the button when wave is in progress
+        // We want to DISABLE the button when wave is in progress
+        // Keep disabled if the last enemy has spawned
+        UI.startWaveEnable(!wave_in_progress && !LAST_ENEMY_SPAWNED);
     }
 
 
