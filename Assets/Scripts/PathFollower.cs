@@ -9,6 +9,7 @@ using UnityEngine;
 /// </summary>
 public class PathFollower : MonoBehaviour
 {
+    private const int COLLECT_MONEY = 100; // amount of coins collected from killing an enemy
     // It needs a path to follow
     public float speed = 0.1f;
     public int health = 100;
@@ -16,11 +17,18 @@ public class PathFollower : MonoBehaviour
     public PathNode target = null;
     public event System.Action onReachedEndEvent;
 
+    public UIManager UIM;
+    private LevelManager levelManager;
+
     // int reachedEndCount = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        UIM = FindObjectOfType<UIManager>();
+        if (!levelManager)
+            levelManager = FindObjectOfType<LevelManager>();
+        
         // Upon init, move its position to the first path node
         transform.position = target.transform.position;
 
@@ -34,6 +42,11 @@ public class PathFollower : MonoBehaviour
             // start dying
             // DeathAnimation()
             Destroy(this.gameObject);
+
+            // get money
+            int currentCoin = levelManager.getCoin();
+            levelManager.setCoin(currentCoin + COLLECT_MONEY);
+            UIM.setTextCoins(currentCoin + COLLECT_MONEY);
         }
 
         // If we reached the node, target the next one
