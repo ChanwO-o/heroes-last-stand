@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,13 +12,18 @@ public class UIManager : MonoBehaviour
     public Text textWave;
     public Text textPower;
     public Button StartWave;
+    public GameObject pauseMenuUI;
+    public TextMeshProUGUI pauseMenuTitle;
+
     public LevelManager levelManager;
+
     private void Start()
     {
         if (!levelManager)
             levelManager = FindObjectOfType<LevelManager>();
         setTextCoins(levelManager.getCoin());
     }
+
     public void setTextCoins(int coins)
     {
         if (textCoins)
@@ -46,6 +52,27 @@ public class UIManager : MonoBehaviour
     public void startWaveEnable(bool interactable){
         if(StartWave){
             StartWave.interactable = interactable;
+        }
+    }
+    public void displayPauseMenu(bool isActive, int gameState){
+        // 0 = in progress, just a regular pause
+        // 1 = Victory!
+        // 2 = Defeat :(
+        pauseMenuUI.SetActive(isActive);
+        
+        switch(gameState){
+            case 0:
+                pauseMenuTitle.text = "Paused";
+                pauseMenuTitle.color = Color.white;
+                break;
+            case 1:
+                pauseMenuTitle.text = "Victory!";
+                pauseMenuTitle.color = Color.yellow;
+                break;
+            case 2:
+                pauseMenuTitle.text = "Defeat";
+                pauseMenuTitle.color = Color.red;
+                break;
         }
     }
 }

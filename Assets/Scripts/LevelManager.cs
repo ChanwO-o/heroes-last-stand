@@ -29,7 +29,7 @@ public class LevelManager : MonoBehaviour
 
     //gameover variables
     public int gamestate = 0; //1 = win //2 = lose
-    public static bool GameIsPaused = false;
+    public bool GameIsPaused = false;
     public GameObject pauseMenuUI;
 
     // Win/Lose condition variables
@@ -57,6 +57,11 @@ public class LevelManager : MonoBehaviour
     public int dead = 0;
 
     public event System.Action TakeDamage;
+
+
+    // ====================
+    // PUBLIC SETS AND GETS
+    // ====================
 
     public int getCoin()
     {
@@ -96,6 +101,10 @@ public class LevelManager : MonoBehaviour
     }
 
 
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -105,9 +114,6 @@ public class LevelManager : MonoBehaviour
         else {
             Destroy(this.gameObject);
         }
-
-        var test = Resources.Load(test_path);
-        Debug.Log("TEST: " + test.ToString());
 
         wave_strings = ReadWavesFromText(test_path);
         Debug.Log("Wave 1: " + wave_strings[0]);
@@ -120,10 +126,10 @@ public class LevelManager : MonoBehaviour
     }
 
 
-
     // Update is called once per frame
     void Update()
     {
+        CheckInput();
         // 1. Check/transition gamestate
         checkGameState();
 
@@ -174,9 +180,19 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     public void Pause()
     {
-        pauseMenuUI.SetActive(true);
+        //pauseMenuUI.SetActive(true);
+        UI.displayPauseMenu(true, gamestate);
         Time.timeScale = 0f;
         GameIsPaused = true;
+    }
+
+    public void Resume()
+    {
+        Debug.Log("RESUMED");
+        //pauseMenuUI.SetActive(false);
+        UI.displayPauseMenu(false, gamestate);
+        Time.timeScale = 1f;
+        GameIsPaused = false;
     }
 
     /// <summary>
@@ -192,6 +208,9 @@ public class LevelManager : MonoBehaviour
             TakeDamage();
         }
     }
+
+
+
 
 
 
@@ -294,7 +313,6 @@ public class LevelManager : MonoBehaviour
     }
 
 
-
     // Meant to be called only when ALL waves are spawned
     // NOTE enemies are PROBABLY still alive at this point
     // This is DIFFERENT from all enemies being dead
@@ -303,6 +321,22 @@ public class LevelManager : MonoBehaviour
         // Just used to handle any logic needed when the last enemy is spawned
         LAST_ENEMY_SPAWNED = true;
         Debug.Log("Last enemy has spawned!");
+    }
+
+
+    // Handle any input like hotkeys or menu access here
+    private void CheckInput(){
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("ESCAPED");
+            if(GameIsPaused)
+            {
+                Resume();
+            } else
+            {
+                Pause();
+            }
+        }
     }
 
     /// <summary>
