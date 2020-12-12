@@ -6,7 +6,7 @@ public class Warrior : MonoBehaviour
 {
     public  Animator animator;
 
-    public float power = 20.0f;
+    public float power = 5.0f;
     public float speed = 5.0f;
     public float distThreshold = 1.0f;
     public float attackRangeThreshold = 1.3f; // hero's attack range

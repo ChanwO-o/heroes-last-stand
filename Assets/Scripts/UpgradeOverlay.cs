@@ -49,20 +49,30 @@ public class UpgradeOverlay : MonoBehaviour
     }
     private void increasePower()
     {
+        int price = 10 * (int) currentTower.getPower();
+        Debug.Log("power price: " + price);
+        
+        if (levelManager.getCoin() < price)
+            return; // not enough coins
+
+        quickReduceCoins(price);
         currentTower.setPower(currentTower.getPower() + 10);
         RefreshPower();
-        quickReduceCoins(100);
-        Debug.Log("Power +10");
     }
     private void increaseRange()
     {
-        if(currentTower.getRange() < 6f)
-        {
-            currentTower.setRange(currentTower.getRange() + 0.5f);
-            RefreshRange();
-            quickReduceCoins(100);
-            Debug.Log("Range +10");
-        }
+        if (currentTower.getRange() >= 6f)
+            return; // maxed out range
+        
+        int price = (int) (100 * currentTower.getRange());
+        Debug.Log("range price: " + price);
+
+        if (levelManager.getCoin() < price)
+            return; // not enough coins
+
+        quickReduceCoins(price);
+        currentTower.setRange(currentTower.getRange() + 0.5f);
+        RefreshRange();
     }
     private void closePanel()
     {
@@ -71,10 +81,10 @@ public class UpgradeOverlay : MonoBehaviour
     private void quickReduceCoins(int amount)
     {
         int currentCoin = levelManager.getCoin();
-        if (currentCoin > 100)
+        if (currentCoin > amount)
         {
-            levelManager.setCoin(currentCoin - 100);
-            UIM.setTextCoins(currentCoin - 100);
+            levelManager.setCoin(currentCoin - amount);
+            UIM.setTextCoins(currentCoin - amount);
         }
     }
     private void RefreshRange()
