@@ -1,4 +1,12 @@
 # This is a comment. Follow the example below to add more waves!
 # Each line is a wave
-1 waddle 1 ice_waddle 1 yellow_waddle
-15 waddle 20 ice_waddle 5 ice_waddle
+5 waddle
+9 waddle 1 ice_waddle
+2 waddle 3 ice_waddle 3 waddle 3 waddle 3 waddle 1 yellow_waddle
+3 waddle 3 ice_waddle 3 yellow_waddle 3 ice_waddle 3 waddle 3 yellow_waddle 2 waddle
+4 waddle 5 ice_waddle 4 yellow_waddle 4 ice_waddle 4 waddle 5 yellow_waddle
+10 waddle 10 ice_waddle 10 yellow_waddle
+2 waddle 2 ice_waddle 2 yellow_waddle 2 ice_waddle 2 waddle 2 yellow_waddle 2 ice_waddle 2 yellow_waddle 2 waddle 2 ice_waddle 2 yellow_waddle 2 ice_waddle 2 waddle 2 yellow_waddle 2 ice_waddle 2 yellow_waddle
+5 waddle 5 ice_waddle 5 yellow_waddle 5 ice_waddle 5 waddle 5 yellow_waddle 5 ice_waddle 5 yellow_waddle
+3 waddle 3 ice_waddle 3 yellow_waddle 3 ice_waddle 3 waddle 3 yellow_waddle 3 ice_waddle 3 yellow_waddle 3 waddle 3 ice_waddle 3 yellow_waddle 3 ice_waddle 3 waddle 3 yellow_waddle 3 ice_waddle 3 yellow_waddle
+4 waddle 4 ice_waddle 4 yellow_waddle 4 ice_waddle 4 waddle 4 yellow_waddle 4 ice_waddle 4 yellow_waddle 4 waddle 4 ice_waddle 4 yellow_waddle 4 ice_waddle 4 waddle 4 yellow_waddle 4 ice_waddle 4 yellow_waddle
