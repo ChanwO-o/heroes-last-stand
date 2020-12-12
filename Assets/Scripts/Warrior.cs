@@ -70,7 +70,7 @@ public class Warrior : MonoBehaviour
             else // in range; attack!
             {
                 // Debug.Log("TARGET IN RANGE");
-                Debug.Log("distance: " + distance + " range: " + attackRangeThreshold);
+                // Debug.Log("distance: " + distance + " range: " + attackRangeThreshold);
                 UpdateAnimatorIsAttacking(true);
                 AttackTarget();
             }
