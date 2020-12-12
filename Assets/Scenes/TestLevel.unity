@@ -1565,7 +1565,6 @@ MonoBehaviour:
   textHealth: {fileID: 1375757085}
   textDeath: {fileID: 411622163}
   textWave: {fileID: 1702676396}
-  textPower: {fileID: 1390660798}
   StartWave: {fileID: 1142424253}
   pauseMenuUI: {fileID: 1028870524}
   pauseMenuTitle: {fileID: 2099007136}
@@ -3645,18 +3644,6 @@ MonoBehaviour:
   - {fileID: 1095299302}
   - {fileID: 2016857364}
   end: 0
---- !u!114 &1390660798 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1780102777391651153, guid: 5ec51a19943996c4e855e49e191e0fad,
-    type: 3}
-  m_PrefabInstance: {fileID: 1880187102}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1447745842
 GameObject:
   m_ObjectHideFlags: 0
@@ -4783,16 +4770,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpgradeOverlay
       objectReference: {fileID: 0}
-    - target: {fileID: 3013699586240454564, guid: 5ec51a19943996c4e855e49e191e0fad,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3013699586240454566, guid: 5ec51a19943996c4e855e49e191e0fad,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 3013699586240454566, guid: 5ec51a19943996c4e855e49e191e0fad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4810,11 +4787,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3013699586240454566, guid: 5ec51a19943996c4e855e49e191e0fad,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3013699586240454566, guid: 5ec51a19943996c4e855e49e191e0fad,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -4827,6 +4799,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3013699586240454566, guid: 5ec51a19943996c4e855e49e191e0fad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3013699586240454566, guid: 5ec51a19943996c4e855e49e191e0fad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3013699586240454566, guid: 5ec51a19943996c4e855e49e191e0fad,
         type: 3}

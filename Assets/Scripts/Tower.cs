@@ -29,6 +29,7 @@ public class Tower : MonoBehaviour
                 GameObject newArrow = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
                 //newArrow.transform.LookAt(target.transform);
                 newArrow.transform.up = target.transform.position - transform.position;
+                newArrow.GetComponent<Projectile>().damage = (int)thePower;
             }
 
         }else{
@@ -47,7 +48,7 @@ public class Tower : MonoBehaviour
     private void Awake()
     {
         thePower = 10f;
-        theRange = 3f;
+        theRange = 2f;
         cooldown = 0.6f;
     }
 

@@ -11,6 +11,10 @@ public class UpgradeOverlay : MonoBehaviour
     public UIManager UIM;
     private LevelManager levelManager;
     private Tower currentTower;
+
+    public Text rangeText;
+    public Text powerText;
+
     private void Awake()
     {
         Instance = this;
@@ -31,12 +35,12 @@ public class UpgradeOverlay : MonoBehaviour
     {
         Instance.Show(tower);
         Instance.RefreshRange();
+        Instance.RefreshPower();
     }
     private void Show(Tower tower)
     {
         gameObject.SetActive(true);
         currentTower = tower;
-        UIM.setTextPower(currentTower.getPower());
         transform.position = new Vector3(tower.transform.position.x, tower.transform.position.y, 2);
     }
     private void Hide()
@@ -46,13 +50,13 @@ public class UpgradeOverlay : MonoBehaviour
     private void increasePower()
     {
         currentTower.setPower(currentTower.getPower() + 10);
-        UIM.setTextPower(currentTower.getPower());
+        RefreshPower();
         quickReduceCoins(100);
         Debug.Log("Power +10");
     }
     private void increaseRange()
     {
-        if(currentTower.getRange() < 2.5f)
+        if(currentTower.getRange() < 6f)
         {
             currentTower.setRange(currentTower.getRange() + 0.5f);
             RefreshRange();
@@ -75,6 +79,11 @@ public class UpgradeOverlay : MonoBehaviour
     }
     private void RefreshRange()
     {
-        transform.Find("Range").localScale = Vector3.one * currentTower.getRange() * 1f;
+        transform.Find("Range").localScale = Vector3.one * currentTower.getRange() * 0.3f;
+        rangeText.text = String.Format("Range\n{0}", currentTower.getRange());
+    }
+    private void RefreshPower()
+    {
+        powerText.text = String.Format("Power\n{0}", currentTower.getPower());
     }
 }

@@ -10,7 +10,6 @@ public class UIManager : MonoBehaviour
     public Text textHealth;
     public Text textDeath;
     public Text textWave;
-    public Text textPower;
     public Button StartWave;
     public GameObject pauseMenuUI;
     public TextMeshProUGUI pauseMenuTitle;
@@ -43,11 +42,6 @@ public class UIManager : MonoBehaviour
     {
         if (textWave)
             textWave.text = wave;
-    }
-    public void setTextPower(float power)
-    {
-        if (textPower)
-            textPower.text = power.ToString();
     }
     public void startWaveEnable(bool interactable){
         if(StartWave){
