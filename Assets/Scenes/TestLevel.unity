@@ -2044,7 +2044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 855980953}
-  power: 20
+  power: 5
   speed: 5
   distThreshold: 4
   attackRangeThreshold: 5
@@ -4390,7 +4390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1768757854}
-  power: 20
+  power: 5
   speed: 5
   distThreshold: 1
   attackRangeThreshold: 1.3
