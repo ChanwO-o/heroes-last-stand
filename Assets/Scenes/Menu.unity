@@ -840,11 +840,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'DEVELOPER
+  m_Text: 'MUSIC COMPOSITION
 
-    DESIGNER
-
-'
+    PRODUCTION'
 --- !u!222 &207892403
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1979,9 +1977,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'TEAM LEAD
 
-    PIXEL ART
-
-'
+    ART DIRECTOR'
 --- !u!222 &590150713
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3250,7 +3246,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'DOCUMENTOR
 
-    ART
+    INTERFACE DESIGN
 
 '
 --- !u!222 &1287329037
