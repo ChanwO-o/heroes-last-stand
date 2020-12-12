@@ -9,7 +9,7 @@ using UnityEngine;
 /// </summary>
 public class PathFollower : MonoBehaviour
 {
-    private const int COLLECT_MONEY = 100; // amount of coins collected from killing an enemy
+    private const int COLLECT_MONEY = 50; // amount of coins collected from killing an enemy
     // It needs a path to follow
     public float speed = 0.1f;
     public int health = 100;
